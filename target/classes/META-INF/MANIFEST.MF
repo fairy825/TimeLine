@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: TimeLine
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Mijika
+Implementation-Vendor-Id: com.timeline
+Build-Jdk: 1.8.0_65
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/TimeLine
+Created-By: Maven Integration for Eclipse
+
