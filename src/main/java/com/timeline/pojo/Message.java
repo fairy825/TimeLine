@@ -24,7 +24,49 @@ public class Message {
     @Transient
     List<MessageImage> messageImages;
     
-    public void setMessageImages(List<MessageImage> messageImages) {
+    public static class MessageBuilder{
+    	private Integer id;       
+        private String author;
+        private Date createTime;
+        private String content;
+
+        public MessageBuilder id(Integer id){
+            this.id = id;
+            return this;
+        }
+
+        public MessageBuilder author(String author){
+            this.author = author;
+            return this;
+        }
+
+        public MessageBuilder content(String content){
+            this.content = content;
+            return this;
+        }
+
+        public MessageBuilder createTime(Date createTime){
+            this.createTime = createTime;
+            return this;
+        }
+
+        public Message build(){
+            return new Message(author,content,createTime);
+        }
+
+    }
+    public Message() {
+	}
+
+
+	public Message(String author, String content, Date createTime) {
+		this.author = author;
+		this.createTime = createTime;
+		this.content = content;
+	}
+
+
+	public void setMessageImages(List<MessageImage> messageImages) {
 		this.messageImages = messageImages;
 	}
 

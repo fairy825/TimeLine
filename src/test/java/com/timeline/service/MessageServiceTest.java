@@ -1,7 +1,11 @@
+/**
+ * Junit4 OK
+ */
 package com.timeline.service;
 
 import java.net.URI;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +32,8 @@ import org.springframework.web.context.WebApplicationContext;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+
+import com.fasterxml.jackson.databind.Module.SetupContext;
 import com.timeline.Application;
 import com.timeline.mapper.MessageImageMapper;
 import com.timeline.mapper.MessageMapper;
@@ -44,34 +50,31 @@ public class MessageServiceTest {
 	private MessageImageMapper messageImageMapper;
 	@Autowired
 	private MessageService messageService;
+	private Message message;
 
-	@Test
-	public void getAllMessages() throws Exception {
-		List<Message> list = new ArrayList<Message>();
-		Message message = new Message();
-		message.setAuthor("Tom");
-		message.setContent("Hello");
-		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");     
-		message.setCreateTime(format.parse("2019-11-11 11:00:00"));
+	@Before
+	public void setup() throws Exception {
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+		message = new Message.MessageBuilder().author("Tom").content("Hello")
+				.createTime(format.parse("2019-11-11 11:00:00")).build();
 		message.setId(1);
-		list.add(message);
+	}
 
-		List<MessageImage> messageImages = new ArrayList<MessageImage>();
-		MessageImage messageImage = new MessageImage();
-		messageImage.setId(1);
-		messageImage.setMid(1);
-		messageImages.add(messageImage);
-		
+	@Test 
+	public void should_get_all_messages() throws Exception {
+		List<Message> list = new ArrayList<Message>();
+		list.add(message);
+		System.out.print(message.getContent());
 		when(messageMapper.queryAll()).thenReturn(list);
-		
 		messageService.getAllMessages(1, 3);
 		verify(messageMapper, times(1)).queryAll();
 		ArgumentCaptor<Integer> intArgCaptor = ArgumentCaptor.forClass(Integer.class);
 		verify(messageImageMapper, times(1)).queryByMessage(intArgCaptor.capture());
-		assertEquals(Integer.valueOf(list.size()), intArgCaptor.getValue());
+		
+		assertEquals(Integer.valueOf(message.getId()), intArgCaptor.getValue());
 	}
 }
-
 
 //package com.timeline.service;
 //
@@ -152,5 +155,3 @@ public class MessageServiceTest {
 //		assertEquals(Integer.valueOf(list.size()), intArgCaptor.getValue());
 //	}
 //}
-
-

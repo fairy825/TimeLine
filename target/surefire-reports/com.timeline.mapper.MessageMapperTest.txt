@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: com.timeline.mapper.MessageMapperTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.001 s <<< FAILURE! - in com.timeline.mapper.MessageMapperTest
+initializationError(com.timeline.mapper.MessageMapperTest)  Time elapsed: 0.001 s  <<< ERROR!
+java.lang.Exception: The class com.timeline.mapper.MessageMapperTest is not public.
+
+initializationError(com.timeline.mapper.MessageMapperTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: Test class should have exactly one public constructor
+
+initializationError(com.timeline.mapper.MessageMapperTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.Exception: No runnable methods
+

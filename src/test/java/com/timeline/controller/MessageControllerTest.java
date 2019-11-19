@@ -42,12 +42,12 @@ public class MessageControllerTest {
 	
 	//如果改成@BeforeAll 会失败
 	@Before
-	public void setupMockMvc() {
+	public void setup() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 
 	@Test
-	public void showFirstPage() throws Exception {
+	public void should_show_first_page() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get(new URI("/showAll")))
 		.andExpect(MockMvcResultMatchers.status().isOk())
 		.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -61,7 +61,7 @@ public class MessageControllerTest {
 	}
 
 	@Test
-	public void showOtherPage() throws Exception {
+	public void should_show_second_page() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get(new URI("/showAll?page=2")))
 		.andExpect(MockMvcResultMatchers.status().isOk())
 		.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON_UTF8))
@@ -83,10 +83,13 @@ public class MessageControllerTest {
 //
 //import java.net.URI;
 //
+//import javax.annotation.Resource;
+//
 //import org.junit.Before;
 //import org.junit.Test;
 //import org.junit.jupiter.api.BeforeAll;
 //import org.junit.jupiter.api.DisplayName;
+//import org.junit.jupiter.api.extension.ExtendWith;
 //import org.junit.runner.RunWith;
 //import org.mockito.ArgumentCaptor;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +97,7 @@ public class MessageControllerTest {
 //import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.boot.test.mock.mockito.MockBean;
 //import org.springframework.http.MediaType;
+//import org.springframework.test.context.junit.jupiter.SpringExtension;
 //import org.springframework.test.context.junit4.SpringRunner;
 //import org.springframework.test.context.web.WebAppConfiguration;
 //import org.springframework.test.web.servlet.MockMvc;
@@ -107,13 +111,14 @@ public class MessageControllerTest {
 //import static org.mockito.Mockito.*;
 //import com.timeline.Application;
 //import com.timeline.service.MessageService;
-//
+////@ExtendWith(SpringExtension.class)
 //@WebMvcTest
 //public class MessageControllerTest {
 //
 //	@Autowired
 //	private MockMvc mockMvc;
 //	@MockBean
+////	@Resource
 //	private MessageService messageService;
 //	
 //	@Test
